@@ -1,0 +1,48 @@
+% ----------
+%   Header
+% ----------
+
+\AddToShipoutPictureBG*{%
+  \AtPageUpperLeft{%
+    \raisebox{-\height}{%
+      \color{bgcolor}\rule{1\paperwidth}{.1\paperheight}%
+    }%
+  }%
+}
+
+\raggedcolumns
+\begin{multicols}{2}
+    \color{fgcolor}
+    \bfseries\selectfont
+    \vspace{1ex}
+    {
+        \huge 
+        \rotatebox[origin=c]{270}{
+            {\color{cmyCyan}|\hspace{-0.15em}}
+            {\color{cmyMagenta}|\hspace{-0.15em}}
+            {\color{cmyYellow}|}
+        }
+        \hspace{0.25em} Cass Bunting 
+    }
+\columnbreak
+    \vspace{-2ex}
+    \begin{multicols}{2}
+        \onehalfspacing
+        \raggedleft
+        \href{mailto:cass@cbunt.ing}{cass@cbunt.ing \NerdIcon{}}\\
+        \href{tel:\PHONENUM}{\phonenumber{\PHONENUM} \NerdIcon{}}\\
+    \columnbreak
+        \href{https://cbunt.ing}{https://cbunt.ing \NerdIcon{}} \\
+        Vancouver, BC \NerdIcon{}
+    \end{multicols}
+\end{multicols}
+
+% -------------------
+%   Body Formatting
+% -------------------
+
+\vspace{3ex}
+
+\setlength\columnsep{0.5in}
+
+\multicols{2}

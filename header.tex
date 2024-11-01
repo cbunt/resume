@@ -1,0 +1,124 @@
+% ------------
+%   General
+% ------------
+
+\usepackage[letterpaper, margin=0.5in, top=0.4in]{geometry}
+\usepackage{hyperref}
+\usepackage{multicol}
+
+% disable page numbers
+\pagenumbering{gobble}
+
+% regular font for urls
+\urlstyle{same}
+
+% -------------------
+%   Section Headers
+% -------------------
+
+\usepackage{titlesec}
+
+\titleformat{\subsection}{\normalfont\normalsize\bfseries}{}{}{}[]
+\titlespacing{\subsection}{0pt}{1ex}{0pt}
+
+% remove section numbers
+\setcounter{secnumdepth}{0}
+
+% -----------
+%   Colors
+% -----------
+
+\usepackage{xcolor}
+
+\definecolor{bgcolor}{HTML}{0A102E}
+\definecolor{fgcolor}{HTML}{dde4fa}
+\definecolor{cmyCyan}{HTML}{18F7F7}
+\definecolor{cmyMagenta}{HTML}{FF61FF}
+\definecolor{cmyYellow}{HTML}{FFFF16}
+
+\color{bgcolor}
+
+% ---------
+%   Fonts
+% ---------
+
+\usepackage{fontspec}
+
+% 'Renderer=OpenType' prevents luaload from messing up codepoints
+
+\setmainfont{asap}[
+    Path=fonts/,
+    Scale=0.9,
+    Extension=.ttf, 
+    Renderer=OpenType,
+    Ligatures=TeX,
+    UprightFont=*-500,
+    ItalicFont=*-500italic,
+    BoldFont=*-900,
+    BoldItalicFont=*-900italic, 
+    FontFace={sb}{n}{*-600},
+    FontFace={sb}{it}{*-600italic}
+]
+
+\newfontfamily{\NerdFont}[
+    Path=fonts/,
+    NFSSFamily=NerdFont,
+    Extension=.ttf,
+    Renderer=OpenType,
+    Ligatures=TeX,
+    BoldFont=*,
+    FontFace={sb}{n}{*},
+]{SymbolsNerdFontMono-Regular}
+
+% ---------------
+%   Skill Icons
+% ---------------
+
+\usepackage{expl3}
+
+\ExplSyntaxOn
+\cs_set_eq:NN \intfromhex \int_from_hex:n
+\ExplSyntaxOff
+
+\newcommand{\NerdIcon}[1]{{\fontfamily{NerdFont}\selectfont #1}}
+
+% hack to override markdown formatting
+\renewcommand{\textsubscript}[1]{\NerdIcon{\Uchar\intfromhex{#1}}}
+
+% ----------------
+%   List Styling
+% ----------------
+
+\usepackage[inline]{enumitem}
+\usepackage{ragged2e}
+
+\newcommand{\BreakBox}[1]{\hfil\penalty 100\hfilneg\hbox{#1}\hspace{1em}}
+
+\renewenvironment{enumerate}{%
+    \raggedright
+    \fontseries{sb}\selectfont
+    \setlength{\leftskip}{0.25em}
+    \begin{spacing}{1.75}
+    \begin{enumerate*}[label={}]
+}{%
+    \end{enumerate*}
+    \end{spacing}
+    \ignorespacesafterend%
+}
+
+\setlist[itemize]{
+    label={},
+    itemsep=0.25em,
+    parsep=0pt,
+    itemindent=!,
+    leftmargin=*,
+}
+
+% -------------------
+%   Header Packages
+% -------------------
+
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{setspace}
+\usepackage[country=US, area-code-sep=brackets, link=off]{phonenumbers}
