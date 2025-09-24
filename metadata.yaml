@@ -1,0 +1,17 @@
+documentclass: article
+
+mainfont: AtkynsonMono Nerd Font
+# mainfont: Atkinson Hyperlegible Next
+fontsize: 10pt
+linestretch: 1.25
+
+papersize: letter
+pagestyle: empty
+
+geometry: 
+- margin=1in
+
+hyperrefoptions:
+- unicode
+- hidelinks
+- pdfstartview=fit

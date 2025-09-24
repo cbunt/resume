@@ -2,30 +2,22 @@ PHONENUM = 1234567890
 OUTPUT = resume.pdf
 EXTRAOPTS =
 
+TEMP_DIR := $(shell mktemp -d)
+
 all:
-	echo "\newcommand{\PHONENUM}{$(PHONENUM)}" \
+	export TEXMFVAR=$(TEMP_DIR) \
+	&& echo "\newcommand{\PHONENUM}{$(PHONENUM)}" \
 	| pandoc \
-		--pdf-engine=lualatex \
-		--lua-filter=WrapItemFilter.lua \
-		--metadata fontsize="12pt" \
-		--include-in-header=/dev/stdin \
+		--pdf-engine=xelatex \
+		--metadata-file="metadata.yaml" \
 		--include-in-header=header.tex \
+		--include-in-header=/dev/stdin \
 		--include-before-body=before.tex \
 		$(EXTRAOPTS) \
 		--output ./build/$(OUTPUT) \
-		resume.md
-		
+		resume.md \
+	&& rm -fr $(TEMP_DIR)
 
 clean:
-	rm -fr build/*
-
-install:
-	mkdir -p fonts && \
-	cd fonts && \
-	curl --location --remote-name --remote-header-name --clobber \
-	https://github.com/ryanoasis/nerd-fonts/raw/refs/heads/master/patched-fonts/NerdFontsSymbolsOnly/SymbolsNerdFontMono-Regular.ttf && \
-	curl --location "https://gwfh.mranftl.com/api/fonts/asap?download=zip&subsets=latin&variants=500,900,500italic,600,600italic,900italic&formats=ttf" \
-	| unzip - && \
-	for i in $$( find . -name "asap-*.ttf"  ) ; do \
-		mv -f $$i $$(echo $$i | sed 's/-v[0-9]\+-latin//') ; \
-	done
+	rm -fr build/* \
+	&& rm -fr $(TEMP_DIR)
